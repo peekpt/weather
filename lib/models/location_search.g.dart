@@ -23,12 +23,12 @@ class _$LocationSearchSerializer
       'title',
       serializers.serialize(object.title,
           specifiedType: const FullType(String)),
-      'lattLong',
+      'latt_long',
       serializers.serialize(object.lattLong,
           specifiedType: const FullType(String)),
       'woeid',
       serializers.serialize(object.woeid, specifiedType: const FullType(int)),
-      'locationType',
+      'location_type',
       serializers.serialize(object.locationType,
           specifiedType: const FullType(LocationType)),
     ];
@@ -57,7 +57,7 @@ class _$LocationSearchSerializer
           result.title = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
-        case 'lattLong':
+        case 'latt_long':
           result.lattLong = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
@@ -69,7 +69,7 @@ class _$LocationSearchSerializer
           result.distance = serializers.deserialize(value,
               specifiedType: const FullType(int)) as int;
           break;
-        case 'locationType':
+        case 'location_type':
           result.locationType = serializers.deserialize(value,
               specifiedType: const FullType(LocationType)) as LocationType;
           break;

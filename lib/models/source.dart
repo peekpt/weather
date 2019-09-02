@@ -10,7 +10,10 @@ part 'source.g.dart';
 
 abstract class Source implements Built<Source, SourceBuilder> {
   String get title;
+  String get slug;
   String get url;
+  @BuiltValueField(wireName: 'crawl_rate')
+  int get crawlRate;
 
   Source._();
 

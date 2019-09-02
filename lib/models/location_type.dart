@@ -5,13 +5,13 @@ import 'package:built_value/serializer.dart';
 part 'location_type.g.dart';
 
 class LocationType extends EnumClass {
-  @BuiltValueField(wireName: 'City')
+  @BuiltValueEnumConst(wireName: 'City')
   static const LocationType city = _$city;
-  @BuiltValueField(wireName: 'Region / State / Province')
+  @BuiltValueEnumConst(wireName: 'Region / State / Province')
   static const LocationType regionStateProvince = _$regionStateProvince;
-  @BuiltValueField(wireName: 'Country')
+  @BuiltValueEnumConst(wireName: 'Country')
   static const LocationType country = _$country;
-  @BuiltValueField(wireName: 'Continent')
+  @BuiltValueEnumConst(wireName: 'Continent')
   static const LocationType continent = _$continent;
 
   const LocationType._(String name) : super(name);

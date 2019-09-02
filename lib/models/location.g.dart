@@ -18,29 +18,43 @@ class _$LocationSerializer implements StructuredSerializer<Location> {
   Iterable<Object> serialize(Serializers serializers, Location object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
+      'consolidated_weather',
+      serializers.serialize(object.consolidatedWeather,
+          specifiedType:
+              const FullType(BuiltList, const [const FullType(Weather)])),
       'title',
       serializers.serialize(object.title,
           specifiedType: const FullType(String)),
       'woeid',
       serializers.serialize(object.woeid, specifiedType: const FullType(int)),
-      'lattLong',
+      'latt_long',
       serializers.serialize(object.lattLong,
           specifiedType: const FullType(String)),
-      'locationType',
+      'location_type',
       serializers.serialize(object.locationType,
           specifiedType: const FullType(LocationType)),
-      'timeZoneName',
-      serializers.serialize(object.timeZoneName,
+      'timezone_name',
+      serializers.serialize(object.timezoneName,
           specifiedType: const FullType(String)),
-      'sunRise',
+      'timezone',
+      serializers.serialize(object.timezone,
+          specifiedType: const FullType(String)),
+      'sun_rise',
       serializers.serialize(object.sunRise,
           specifiedType: const FullType(DateTime)),
-      'sunSet',
+      'sun_set',
       serializers.serialize(object.sunSet,
           specifiedType: const FullType(DateTime)),
       'time',
       serializers.serialize(object.time,
           specifiedType: const FullType(DateTime)),
+      'parent',
+      serializers.serialize(object.parent,
+          specifiedType: const FullType(Parent)),
+      'sources',
+      serializers.serialize(object.sources,
+          specifiedType:
+              const FullType(BuiltList, const [const FullType(Source)])),
     ];
 
     return result;
@@ -57,6 +71,12 @@ class _$LocationSerializer implements StructuredSerializer<Location> {
       iterator.moveNext();
       final dynamic value = iterator.current;
       switch (key) {
+        case 'consolidated_weather':
+          result.consolidatedWeather.replace(serializers.deserialize(value,
+                  specifiedType: const FullType(
+                      BuiltList, const [const FullType(Weather)]))
+              as BuiltList<dynamic>);
+          break;
         case 'title':
           result.title = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
@@ -65,29 +85,43 @@ class _$LocationSerializer implements StructuredSerializer<Location> {
           result.woeid = serializers.deserialize(value,
               specifiedType: const FullType(int)) as int;
           break;
-        case 'lattLong':
+        case 'latt_long':
           result.lattLong = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
-        case 'locationType':
+        case 'location_type':
           result.locationType = serializers.deserialize(value,
               specifiedType: const FullType(LocationType)) as LocationType;
           break;
-        case 'timeZoneName':
-          result.timeZoneName = serializers.deserialize(value,
+        case 'timezone_name':
+          result.timezoneName = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
-        case 'sunRise':
+        case 'timezone':
+          result.timezone = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'sun_rise':
           result.sunRise = serializers.deserialize(value,
               specifiedType: const FullType(DateTime)) as DateTime;
           break;
-        case 'sunSet':
+        case 'sun_set':
           result.sunSet = serializers.deserialize(value,
               specifiedType: const FullType(DateTime)) as DateTime;
           break;
         case 'time':
           result.time = serializers.deserialize(value,
               specifiedType: const FullType(DateTime)) as DateTime;
+          break;
+        case 'parent':
+          result.parent.replace(serializers.deserialize(value,
+              specifiedType: const FullType(Parent)) as Parent);
+          break;
+        case 'sources':
+          result.sources.replace(serializers.deserialize(value,
+                  specifiedType:
+                      const FullType(BuiltList, const [const FullType(Source)]))
+              as BuiltList<dynamic>);
           break;
       }
     }
@@ -98,6 +132,8 @@ class _$LocationSerializer implements StructuredSerializer<Location> {
 
 class _$Location extends Location {
   @override
+  final BuiltList<Weather> consolidatedWeather;
+  @override
   final String title;
   @override
   final int woeid;
@@ -106,27 +142,40 @@ class _$Location extends Location {
   @override
   final LocationType locationType;
   @override
-  final String timeZoneName;
+  final String timezoneName;
+  @override
+  final String timezone;
   @override
   final DateTime sunRise;
   @override
   final DateTime sunSet;
   @override
   final DateTime time;
+  @override
+  final Parent parent;
+  @override
+  final BuiltList<Source> sources;
 
   factory _$Location([void Function(LocationBuilder) updates]) =>
       (new LocationBuilder()..update(updates)).build();
 
   _$Location._(
-      {this.title,
+      {this.consolidatedWeather,
+      this.title,
       this.woeid,
       this.lattLong,
       this.locationType,
-      this.timeZoneName,
+      this.timezoneName,
+      this.timezone,
       this.sunRise,
       this.sunSet,
-      this.time})
+      this.time,
+      this.parent,
+      this.sources})
       : super._() {
+    if (consolidatedWeather == null) {
+      throw new BuiltValueNullFieldError('Location', 'consolidatedWeather');
+    }
     if (title == null) {
       throw new BuiltValueNullFieldError('Location', 'title');
     }
@@ -139,8 +188,11 @@ class _$Location extends Location {
     if (locationType == null) {
       throw new BuiltValueNullFieldError('Location', 'locationType');
     }
-    if (timeZoneName == null) {
-      throw new BuiltValueNullFieldError('Location', 'timeZoneName');
+    if (timezoneName == null) {
+      throw new BuiltValueNullFieldError('Location', 'timezoneName');
+    }
+    if (timezone == null) {
+      throw new BuiltValueNullFieldError('Location', 'timezone');
     }
     if (sunRise == null) {
       throw new BuiltValueNullFieldError('Location', 'sunRise');
@@ -150,6 +202,12 @@ class _$Location extends Location {
     }
     if (time == null) {
       throw new BuiltValueNullFieldError('Location', 'time');
+    }
+    if (parent == null) {
+      throw new BuiltValueNullFieldError('Location', 'parent');
+    }
+    if (sources == null) {
+      throw new BuiltValueNullFieldError('Location', 'sources');
     }
   }
 
@@ -164,14 +222,18 @@ class _$Location extends Location {
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
     return other is Location &&
+        consolidatedWeather == other.consolidatedWeather &&
         title == other.title &&
         woeid == other.woeid &&
         lattLong == other.lattLong &&
         locationType == other.locationType &&
-        timeZoneName == other.timeZoneName &&
+        timezoneName == other.timezoneName &&
+        timezone == other.timezone &&
         sunRise == other.sunRise &&
         sunSet == other.sunSet &&
-        time == other.time;
+        time == other.time &&
+        parent == other.parent &&
+        sources == other.sources;
   }
 
   @override
@@ -181,32 +243,56 @@ class _$Location extends Location {
             $jc(
                 $jc(
                     $jc(
-                        $jc($jc($jc(0, title.hashCode), woeid.hashCode),
-                            lattLong.hashCode),
-                        locationType.hashCode),
-                    timeZoneName.hashCode),
-                sunRise.hashCode),
-            sunSet.hashCode),
-        time.hashCode));
+                        $jc(
+                            $jc(
+                                $jc(
+                                    $jc(
+                                        $jc(
+                                            $jc(
+                                                $jc(
+                                                    0,
+                                                    consolidatedWeather
+                                                        .hashCode),
+                                                title.hashCode),
+                                            woeid.hashCode),
+                                        lattLong.hashCode),
+                                    locationType.hashCode),
+                                timezoneName.hashCode),
+                            timezone.hashCode),
+                        sunRise.hashCode),
+                    sunSet.hashCode),
+                time.hashCode),
+            parent.hashCode),
+        sources.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper('Location')
+          ..add('consolidatedWeather', consolidatedWeather)
           ..add('title', title)
           ..add('woeid', woeid)
           ..add('lattLong', lattLong)
           ..add('locationType', locationType)
-          ..add('timeZoneName', timeZoneName)
+          ..add('timezoneName', timezoneName)
+          ..add('timezone', timezone)
           ..add('sunRise', sunRise)
           ..add('sunSet', sunSet)
-          ..add('time', time))
+          ..add('time', time)
+          ..add('parent', parent)
+          ..add('sources', sources))
         .toString();
   }
 }
 
 class LocationBuilder implements Builder<Location, LocationBuilder> {
   _$Location _$v;
+
+  ListBuilder<Weather> _consolidatedWeather;
+  ListBuilder<Weather> get consolidatedWeather =>
+      _$this._consolidatedWeather ??= new ListBuilder<Weather>();
+  set consolidatedWeather(ListBuilder<Weather> consolidatedWeather) =>
+      _$this._consolidatedWeather = consolidatedWeather;
 
   String _title;
   String get title => _$this._title;
@@ -225,9 +311,13 @@ class LocationBuilder implements Builder<Location, LocationBuilder> {
   set locationType(LocationType locationType) =>
       _$this._locationType = locationType;
 
-  String _timeZoneName;
-  String get timeZoneName => _$this._timeZoneName;
-  set timeZoneName(String timeZoneName) => _$this._timeZoneName = timeZoneName;
+  String _timezoneName;
+  String get timezoneName => _$this._timezoneName;
+  set timezoneName(String timezoneName) => _$this._timezoneName = timezoneName;
+
+  String _timezone;
+  String get timezone => _$this._timezone;
+  set timezone(String timezone) => _$this._timezone = timezone;
 
   DateTime _sunRise;
   DateTime get sunRise => _$this._sunRise;
@@ -241,18 +331,31 @@ class LocationBuilder implements Builder<Location, LocationBuilder> {
   DateTime get time => _$this._time;
   set time(DateTime time) => _$this._time = time;
 
+  ParentBuilder _parent;
+  ParentBuilder get parent => _$this._parent ??= new ParentBuilder();
+  set parent(ParentBuilder parent) => _$this._parent = parent;
+
+  ListBuilder<Source> _sources;
+  ListBuilder<Source> get sources =>
+      _$this._sources ??= new ListBuilder<Source>();
+  set sources(ListBuilder<Source> sources) => _$this._sources = sources;
+
   LocationBuilder();
 
   LocationBuilder get _$this {
     if (_$v != null) {
+      _consolidatedWeather = _$v.consolidatedWeather?.toBuilder();
       _title = _$v.title;
       _woeid = _$v.woeid;
       _lattLong = _$v.lattLong;
       _locationType = _$v.locationType;
-      _timeZoneName = _$v.timeZoneName;
+      _timezoneName = _$v.timezoneName;
+      _timezone = _$v.timezone;
       _sunRise = _$v.sunRise;
       _sunSet = _$v.sunSet;
       _time = _$v.time;
+      _parent = _$v.parent?.toBuilder();
+      _sources = _$v.sources?.toBuilder();
       _$v = null;
     }
     return this;
@@ -273,16 +376,38 @@ class LocationBuilder implements Builder<Location, LocationBuilder> {
 
   @override
   _$Location build() {
-    final _$result = _$v ??
-        new _$Location._(
-            title: title,
-            woeid: woeid,
-            lattLong: lattLong,
-            locationType: locationType,
-            timeZoneName: timeZoneName,
-            sunRise: sunRise,
-            sunSet: sunSet,
-            time: time);
+    _$Location _$result;
+    try {
+      _$result = _$v ??
+          new _$Location._(
+              consolidatedWeather: consolidatedWeather.build(),
+              title: title,
+              woeid: woeid,
+              lattLong: lattLong,
+              locationType: locationType,
+              timezoneName: timezoneName,
+              timezone: timezone,
+              sunRise: sunRise,
+              sunSet: sunSet,
+              time: time,
+              parent: parent.build(),
+              sources: sources.build());
+    } catch (_) {
+      String _$failedField;
+      try {
+        _$failedField = 'consolidatedWeather';
+        consolidatedWeather.build();
+
+        _$failedField = 'parent';
+        parent.build();
+        _$failedField = 'sources';
+        sources.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'Location', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }

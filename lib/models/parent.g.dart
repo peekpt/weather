@@ -21,15 +21,14 @@ class _$ParentSerializer implements StructuredSerializer<Parent> {
       'title',
       serializers.serialize(object.title,
           specifiedType: const FullType(String)),
-      'locationType',
+      'location_type',
       serializers.serialize(object.locationType,
           specifiedType: const FullType(LocationType)),
-      'lattLong',
+      'latt_long',
       serializers.serialize(object.lattLong,
           specifiedType: const FullType(String)),
       'woeid',
-      serializers.serialize(object.woeid,
-          specifiedType: const FullType(String)),
+      serializers.serialize(object.woeid, specifiedType: const FullType(int)),
     ];
 
     return result;
@@ -50,17 +49,17 @@ class _$ParentSerializer implements StructuredSerializer<Parent> {
           result.title = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
-        case 'locationType':
+        case 'location_type':
           result.locationType = serializers.deserialize(value,
               specifiedType: const FullType(LocationType)) as LocationType;
           break;
-        case 'lattLong':
+        case 'latt_long':
           result.lattLong = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
         case 'woeid':
           result.woeid = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(int)) as int;
           break;
       }
     }
@@ -77,7 +76,7 @@ class _$Parent extends Parent {
   @override
   final String lattLong;
   @override
-  final String woeid;
+  final int woeid;
 
   factory _$Parent([void Function(ParentBuilder) updates]) =>
       (new ParentBuilder()..update(updates)).build();
@@ -150,9 +149,9 @@ class ParentBuilder implements Builder<Parent, ParentBuilder> {
   String get lattLong => _$this._lattLong;
   set lattLong(String lattLong) => _$this._lattLong = lattLong;
 
-  String _woeid;
-  String get woeid => _$this._woeid;
-  set woeid(String woeid) => _$this._woeid = woeid;
+  int _woeid;
+  int get woeid => _$this._woeid;
+  set woeid(int woeid) => _$this._woeid = woeid;
 
   ParentBuilder();
 

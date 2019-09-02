@@ -1,19 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
-import 'package:weather/models/location_search_response.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:weather/bloc/bloc.dart';
+import 'package:weather/bloc/theme_changer_bloc.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
-    );
+    return BlocProvider<ThemeChangerBloc>(
+        builder: (context) => ThemeChangerBloc(),
+        child: BlocBuilder<ThemeChangerBloc, ThemeChangerState>(
+            builder: (context, state) => MaterialApp(
+                  title: 'Flutter Demo',
+                  theme: (state is CurrentThemeChangerState)
+                      ? state.theme
+                      : ThemeData.light(),
+                  home: BlocProvider<WeatherApiBloc>(
+                      builder: (context) => WeatherApiBloc(Dio()),
+                      child: MyHomePage(title: 'Flutter Demo Home Page')),
+                )));
   }
 }
 
@@ -27,37 +35,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  Dio dio;
-
-  int _counter = 0;
-
-  _getWeather() async {
-    try {
-      Response response = await dio
-          .get('/api/location/search', queryParameters: {'query': 'london'});
-
-      print(response);
-      if (response.statusCode != 200) return;
-
-      LocationSearchResponse ls =
-          LocationSearchResponse.fromJson(response.data);
-    } catch (e) {
-      print(e);
-    }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-
-    dio = Dio();
-    dio.options
-      ..responseType = ResponseType.plain
-      ..baseUrl = 'https://www.metaweather.com/api/';
-  }
-
   @override
   Widget build(BuildContext context) {
+    WeatherApiBloc weatherApiBloc = BlocProvider.of<WeatherApiBloc>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -66,20 +46,42 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
+            FlatButton(
+              child: Text('color'),
+              onPressed: () {
+                BlocProvider.of<ThemeChangerBloc>(context)
+                    .dispatch(ChangeToColor(ThemeColor.dark));
+              },
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.display1,
+            BlocBuilder<WeatherApiBloc, WeatherApiState>(
+              builder: (context, state) {
+                if (state is BusyState) {
+                  return (Text('Loading...'));
+                } else if (state is LocationSearchState) {
+                  return Column(
+                    children: state.locationSearch
+                        .map((l) => Text(l.woeid.toString()))
+                        .toList(),
+                  );
+                } else
+                  return Text('Click to load location');
+              },
             ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => _getWeather(),
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
+        onPressed: () {
+          if (weatherApiBloc.currentState is BusyState) return;
+          print('dispatch');
+          weatherApiBloc.dispatch(LocationSearchEvent('lisbon'));
+        },
+        tooltip: 'get data',
+        child: Text(
+          'gimme the data',
+          textAlign: TextAlign.center,
+          style: TextStyle(fontSize: 10),
+        ),
       ),
     );
   }

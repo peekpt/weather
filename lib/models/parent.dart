@@ -11,9 +11,11 @@ part 'parent.g.dart';
 
 abstract class Parent implements Built<Parent, ParentBuilder> {
   String get title;
+  @BuiltValueField(wireName: 'location_type')
   LocationType get locationType;
+  @BuiltValueField(wireName: 'latt_long')
   String get lattLong;
-  String get woeid;
+  int get woeid;
 
   Parent._();
 
