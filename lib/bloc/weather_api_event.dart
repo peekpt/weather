@@ -22,3 +22,9 @@ class LocationCordinateSearchEvent extends WeatherApiEvent {
   LocationCordinateSearchEvent(
       {@required this.lattitude, @required this.longitude});
 }
+
+class ApiErrorEvent extends WeatherApiEvent {
+  final Exception error;
+
+  ApiErrorEvent([this.error]);
+}

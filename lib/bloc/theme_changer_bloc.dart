@@ -11,15 +11,12 @@ class ThemeChangerBloc extends Bloc<ThemeChangerEvent, ThemeChangerState> {
   Stream<ThemeChangerState> mapEventToState(
     ThemeChangerEvent event,
   ) async* {
-    if (event is ChangeToColor) {
-      var e = event;
+    if (event is ThemeDark) {
+      yield CurrentThemeChangerState(ThemeData.dark());
+    }
 
-      if (e.color == ThemeColor.light) {
-        yield CurrentThemeChangerState(ThemeData.light());
-      }
-      if (e.color == ThemeColor.dark) {
-        yield CurrentThemeChangerState(ThemeData.dark());
-      }
+    if (event is ThemeLight) {
+      yield CurrentThemeChangerState(ThemeData.light());
     }
   }
 }

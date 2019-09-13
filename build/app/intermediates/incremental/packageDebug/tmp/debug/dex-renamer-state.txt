@@ -1,4 +1,4 @@
-#Sat Aug 31 19:17:04 WEST 2019
+#Fri Sep 13 12:21:56 WEST 2019
 base.0=/Users/paulo/development/Projects/weather/build/app/intermediates/transforms/dexMerger/debug/0
 path.0=classes.dex
 renamed.0=classes.dex

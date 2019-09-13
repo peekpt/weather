@@ -4,24 +4,31 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:weather/bloc/bloc.dart';
 import 'package:weather/bloc/theme_changer_bloc.dart';
+import 'package:weather/pages/location_search_page.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(
+      // Provider injects WeatherApiBloc on the top
+      BlocProvider<WeatherApiBloc>(
+        builder: (context) => WeatherApiBloc(Dio()),
+        child: MyApp(),
+      ),
+    );
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<ThemeChangerBloc>(
-        builder: (context) => ThemeChangerBloc(),
-        child: BlocBuilder<ThemeChangerBloc, ThemeChangerState>(
-            builder: (context, state) => MaterialApp(
-                  title: 'Flutter Demo',
-                  theme: (state is CurrentThemeChangerState)
-                      ? state.theme
-                      : ThemeData.light(),
-                  home: BlocProvider<WeatherApiBloc>(
-                      builder: (context) => WeatherApiBloc(Dio()),
-                      child: MyHomePage(title: 'Flutter Demo Home Page')),
-                )));
+      builder: (context) => ThemeChangerBloc(),
+      child: BlocBuilder<ThemeChangerBloc, ThemeChangerState>(
+        builder: (context, state) => MaterialApp(
+          title: 'Flutter Demo',
+          theme: (state is CurrentThemeChangerState)
+              ? state.theme
+              : ThemeData(primarySwatch: Colors.lightGreen),
+          home: LocationSearchPage(),
+        ),
+      ),
+    );
   }
 }
 
@@ -50,7 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Text('color'),
               onPressed: () {
                 BlocProvider.of<ThemeChangerBloc>(context)
-                    .dispatch(ChangeToColor(ThemeColor.dark));
+                    .dispatch(ThemeDark());
               },
             ),
             BlocBuilder<WeatherApiBloc, WeatherApiState>(
@@ -63,6 +70,8 @@ class _MyHomePageState extends State<MyHomePage> {
                         .map((l) => Text(l.woeid.toString()))
                         .toList(),
                   );
+                } else if (state is ApiError) {
+                  return Text('Error');
                 } else
                   return Text('Click to load location');
               },

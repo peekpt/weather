@@ -1,0 +1,457 @@
+// **************************************************************************
+// BuiltValueGenerator
+// **************************************************************************
+
+Serializer<Weather> _$weatherSerializer = new _$WeatherSerializer();
+
+class _$WeatherSerializer implements StructuredSerializer<Weather> {
+  @override
+  final Iterable<Type> types = const [Weather, _$Weather];
+  @override
+  final String wireName = 'Weather';
+
+  @override
+  Iterable<Object> serialize(Serializers serializers, Weather object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object>[
+      'id',
+      serializers.serialize(object.id, specifiedType: const FullType(int)),
+      'applicable_date',
+      serializers.serialize(object.applicableDate,
+          specifiedType: const FullType(DateTime)),
+      'weather_state_name',
+      serializers.serialize(object.weatherStateName,
+          specifiedType: const FullType(String)),
+      'weather_state_abbr',
+      serializers.serialize(object.weatherStateAbbr,
+          specifiedType: const FullType(WeatherState)),
+      'created',
+      serializers.serialize(object.created,
+          specifiedType: const FullType(DateTime)),
+    ];
+    if (object.windSpeed != null) {
+      result
+        ..add('wind_speed')
+        ..add(serializers.serialize(object.windSpeed,
+            specifiedType: const FullType(double)));
+    }
+    if (object.windDirection != null) {
+      result
+        ..add('wind_direction')
+        ..add(serializers.serialize(object.windDirection,
+            specifiedType: const FullType(double)));
+    }
+    if (object.windDirectionCompass != null) {
+      result
+        ..add('wind_direction_compass')
+        ..add(serializers.serialize(object.windDirectionCompass,
+            specifiedType: const FullType(String)));
+    }
+    if (object.minTemp != null) {
+      result
+        ..add('min_temp')
+        ..add(serializers.serialize(object.minTemp,
+            specifiedType: const FullType(double)));
+    }
+    if (object.maxTemp != null) {
+      result
+        ..add('max_temp')
+        ..add(serializers.serialize(object.maxTemp,
+            specifiedType: const FullType(double)));
+    }
+    if (object.theTemp != null) {
+      result
+        ..add('the_temp')
+        ..add(serializers.serialize(object.theTemp,
+            specifiedType: const FullType(double)));
+    }
+    if (object.airPressure != null) {
+      result
+        ..add('air_pressure')
+        ..add(serializers.serialize(object.airPressure,
+            specifiedType: const FullType(double)));
+    }
+    if (object.humidity != null) {
+      result
+        ..add('humidity')
+        ..add(serializers.serialize(object.humidity,
+            specifiedType: const FullType(int)));
+    }
+    if (object.visibility != null) {
+      result
+        ..add('visibility')
+        ..add(serializers.serialize(object.visibility,
+            specifiedType: const FullType(double)));
+    }
+    if (object.predictability != null) {
+      result
+        ..add('predictability')
+        ..add(serializers.serialize(object.predictability,
+            specifiedType: const FullType(int)));
+    }
+    return result;
+  }
+
+  @override
+  Weather deserialize(Serializers serializers, Iterable<Object> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new WeatherBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final dynamic value = iterator.current;
+      switch (key) {
+        case 'id':
+          result.id = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
+        case 'applicable_date':
+          result.applicableDate = serializers.deserialize(value,
+              specifiedType: const FullType(DateTime)) as DateTime;
+          break;
+        case 'weather_state_name':
+          result.weatherStateName = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'weather_state_abbr':
+          result.weatherStateAbbr = serializers.deserialize(value,
+              specifiedType: const FullType(WeatherState)) as WeatherState;
+          break;
+        case 'wind_speed':
+          result.windSpeed = serializers.deserialize(value,
+              specifiedType: const FullType(double)) as double;
+          break;
+        case 'wind_direction':
+          result.windDirection = serializers.deserialize(value,
+              specifiedType: const FullType(double)) as double;
+          break;
+        case 'wind_direction_compass':
+          result.windDirectionCompass = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'min_temp':
+          result.minTemp = serializers.deserialize(value,
+              specifiedType: const FullType(double)) as double;
+          break;
+        case 'max_temp':
+          result.maxTemp = serializers.deserialize(value,
+              specifiedType: const FullType(double)) as double;
+          break;
+        case 'the_temp':
+          result.theTemp = serializers.deserialize(value,
+              specifiedType: const FullType(double)) as double;
+          break;
+        case 'air_pressure':
+          result.airPressure = serializers.deserialize(value,
+              specifiedType: const FullType(double)) as double;
+          break;
+        case 'humidity':
+          result.humidity = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
+        case 'visibility':
+          result.visibility = serializers.deserialize(value,
+              specifiedType: const FullType(double)) as double;
+          break;
+        case 'predictability':
+          result.predictability = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
+        case 'created':
+          result.created = serializers.deserialize(value,
+              specifiedType: const FullType(DateTime)) as DateTime;
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$Weather extends Weather {
+  @override
+  final int id;
+  @override
+  final DateTime applicableDate;
+  @override
+  final String weatherStateName;
+  @override
+  final WeatherState weatherStateAbbr;
+  @override
+  final double windSpeed;
+  @override
+  final double windDirection;
+  @override
+  final String windDirectionCompass;
+  @override
+  final double minTemp;
+  @override
+  final double maxTemp;
+  @override
+  final double theTemp;
+  @override
+  final double airPressure;
+  @override
+  final int humidity;
+  @override
+  final double visibility;
+  @override
+  final int predictability;
+  @override
+  final DateTime created;
+
+  factory _$Weather([void Function(WeatherBuilder) updates]) =>
+      (new WeatherBuilder()..update(updates)).build();
+
+  _$Weather._(
+      {this.id,
+      this.applicableDate,
+      this.weatherStateName,
+      this.weatherStateAbbr,
+      this.windSpeed,
+      this.windDirection,
+      this.windDirectionCompass,
+      this.minTemp,
+      this.maxTemp,
+      this.theTemp,
+      this.airPressure,
+      this.humidity,
+      this.visibility,
+      this.predictability,
+      this.created})
+      : super._() {
+    if (id == null) {
+      throw new BuiltValueNullFieldError('Weather', 'id');
+    }
+    if (applicableDate == null) {
+      throw new BuiltValueNullFieldError('Weather', 'applicableDate');
+    }
+    if (weatherStateName == null) {
+      throw new BuiltValueNullFieldError('Weather', 'weatherStateName');
+    }
+    if (weatherStateAbbr == null) {
+      throw new BuiltValueNullFieldError('Weather', 'weatherStateAbbr');
+    }
+    if (created == null) {
+      throw new BuiltValueNullFieldError('Weather', 'created');
+    }
+  }
+
+  @override
+  Weather rebuild(void Function(WeatherBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  WeatherBuilder toBuilder() => new WeatherBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is Weather &&
+        id == other.id &&
+        applicableDate == other.applicableDate &&
+        weatherStateName == other.weatherStateName &&
+        weatherStateAbbr == other.weatherStateAbbr &&
+        windSpeed == other.windSpeed &&
+        windDirection == other.windDirection &&
+        windDirectionCompass == other.windDirectionCompass &&
+        minTemp == other.minTemp &&
+        maxTemp == other.maxTemp &&
+        theTemp == other.theTemp &&
+        airPressure == other.airPressure &&
+        humidity == other.humidity &&
+        visibility == other.visibility &&
+        predictability == other.predictability &&
+        created == other.created;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(
+        $jc(
+            $jc(
+                $jc(
+                    $jc(
+                        $jc(
+                            $jc(
+                                $jc(
+                                    $jc(
+                                        $jc(
+                                            $jc(
+                                                $jc(
+                                                    $jc(
+                                                        $jc(
+                                                            $jc(0, id.hashCode),
+                                                            applicableDate
+                                                                .hashCode),
+                                                        weatherStateName
+                                                            .hashCode),
+                                                    weatherStateAbbr.hashCode),
+                                                windSpeed.hashCode),
+                                            windDirection.hashCode),
+                                        windDirectionCompass.hashCode),
+                                    minTemp.hashCode),
+                                maxTemp.hashCode),
+                            theTemp.hashCode),
+                        airPressure.hashCode),
+                    humidity.hashCode),
+                visibility.hashCode),
+            predictability.hashCode),
+        created.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('Weather')
+          ..add('id', id)
+          ..add('applicableDate', applicableDate)
+          ..add('weatherStateName', weatherStateName)
+          ..add('weatherStateAbbr', weatherStateAbbr)
+          ..add('windSpeed', windSpeed)
+          ..add('windDirection', windDirection)
+          ..add('windDirectionCompass', windDirectionCompass)
+          ..add('minTemp', minTemp)
+          ..add('maxTemp', maxTemp)
+          ..add('theTemp', theTemp)
+          ..add('airPressure', airPressure)
+          ..add('humidity', humidity)
+          ..add('visibility', visibility)
+          ..add('predictability', predictability)
+          ..add('created', created))
+        .toString();
+  }
+}
+
+class WeatherBuilder implements Builder<Weather, WeatherBuilder> {
+  _$Weather _$v;
+
+  int _id;
+  int get id => _$this._id;
+  set id(int id) => _$this._id = id;
+
+  DateTime _applicableDate;
+  DateTime get applicableDate => _$this._applicableDate;
+  set applicableDate(DateTime applicableDate) =>
+      _$this._applicableDate = applicableDate;
+
+  String _weatherStateName;
+  String get weatherStateName => _$this._weatherStateName;
+  set weatherStateName(String weatherStateName) =>
+      _$this._weatherStateName = weatherStateName;
+
+  WeatherState _weatherStateAbbr;
+  WeatherState get weatherStateAbbr => _$this._weatherStateAbbr;
+  set weatherStateAbbr(WeatherState weatherStateAbbr) =>
+      _$this._weatherStateAbbr = weatherStateAbbr;
+
+  double _windSpeed;
+  double get windSpeed => _$this._windSpeed;
+  set windSpeed(double windSpeed) => _$this._windSpeed = windSpeed;
+
+  double _windDirection;
+  double get windDirection => _$this._windDirection;
+  set windDirection(double windDirection) =>
+      _$this._windDirection = windDirection;
+
+  String _windDirectionCompass;
+  String get windDirectionCompass => _$this._windDirectionCompass;
+  set windDirectionCompass(String windDirectionCompass) =>
+      _$this._windDirectionCompass = windDirectionCompass;
+
+  double _minTemp;
+  double get minTemp => _$this._minTemp;
+  set minTemp(double minTemp) => _$this._minTemp = minTemp;
+
+  double _maxTemp;
+  double get maxTemp => _$this._maxTemp;
+  set maxTemp(double maxTemp) => _$this._maxTemp = maxTemp;
+
+  double _theTemp;
+  double get theTemp => _$this._theTemp;
+  set theTemp(double theTemp) => _$this._theTemp = theTemp;
+
+  double _airPressure;
+  double get airPressure => _$this._airPressure;
+  set airPressure(double airPressure) => _$this._airPressure = airPressure;
+
+  int _humidity;
+  int get humidity => _$this._humidity;
+  set humidity(int humidity) => _$this._humidity = humidity;
+
+  double _visibility;
+  double get visibility => _$this._visibility;
+  set visibility(double visibility) => _$this._visibility = visibility;
+
+  int _predictability;
+  int get predictability => _$this._predictability;
+  set predictability(int predictability) =>
+      _$this._predictability = predictability;
+
+  DateTime _created;
+  DateTime get created => _$this._created;
+  set created(DateTime created) => _$this._created = created;
+
+  WeatherBuilder();
+
+  WeatherBuilder get _$this {
+    if (_$v != null) {
+      _id = _$v.id;
+      _applicableDate = _$v.applicableDate;
+      _weatherStateName = _$v.weatherStateName;
+      _weatherStateAbbr = _$v.weatherStateAbbr;
+      _windSpeed = _$v.windSpeed;
+      _windDirection = _$v.windDirection;
+      _windDirectionCompass = _$v.windDirectionCompass;
+      _minTemp = _$v.minTemp;
+      _maxTemp = _$v.maxTemp;
+      _theTemp = _$v.theTemp;
+      _airPressure = _$v.airPressure;
+      _humidity = _$v.humidity;
+      _visibility = _$v.visibility;
+      _predictability = _$v.predictability;
+      _created = _$v.created;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(Weather other) {
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
+    _$v = other as _$Weather;
+  }
+
+  @override
+  void update(void Function(WeatherBuilder) updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$Weather build() {
+    final _$result = _$v ??
+        new _$Weather._(
+            id: id,
+            applicableDate: applicableDate,
+            weatherStateName: weatherStateName,
+            weatherStateAbbr: weatherStateAbbr,
+            windSpeed: windSpeed,
+            windDirection: windDirection,
+            windDirectionCompass: windDirectionCompass,
+            minTemp: minTemp,
+            maxTemp: maxTemp,
+            theTemp: theTemp,
+            airPressure: airPressure,
+            humidity: humidity,
+            visibility: visibility,
+            predictability: predictability,
+            created: created);
+    replace(_$result);
+    return _$result;
+  }
+}
+
+// ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,lines_longer_than_80_chars,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new

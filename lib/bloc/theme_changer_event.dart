@@ -10,3 +10,7 @@ class ChangeToColor extends ThemeChangerEvent {
 
   ChangeToColor(this.color);
 }
+
+class ThemeDark extends ThemeChangerEvent {}
+
+class ThemeLight extends ThemeChangerEvent {}
